@@ -17,7 +17,7 @@ export default function IntroductionComponent() {
       <img
         alt=""
         src="	https://ugsound.com/assets/images/background/footer.jpg"
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center blur-lg"
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center blur-sm"
       />
       <div
         aria-hidden="true"

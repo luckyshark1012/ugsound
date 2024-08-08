@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router-dom'
+
+
 import './buy_button.css';
 
 const stats = [
@@ -9,6 +12,8 @@ const stats = [
 ]
 
 export default function SiteStateComponent() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white pt-8 pb-0 sm:pt-8 sm:pb-0">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -24,8 +29,8 @@ export default function SiteStateComponent() {
         </dl>
       </div>
       <div className="flex justify-around mx-auto max-w-7xl px-6 lg:px-8 my-8">
-        <button className="button-64" role="button"><span className="text">Shop Now</span></button>
-        <button className="button-64" role="button"><span className="text">Listen Now</span></button>
+        <button className="button-64" role="button" onClick={() => navigate('/music_store')}><span className="text">Shop Now</span></button>
+        <button className="button-64" role="button" onClick={() => navigate('/top_songs')}><span className="text">Listen Now</span></button>
       </div>
     </div>
   )
