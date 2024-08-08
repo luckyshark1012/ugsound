@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import HeaderComponent from "../../components/header";
+import HeaderComponent from "../header";
 
 
 
-const Main = () => {
+const MainLayout = () => {
     return (
         <>
             <HeaderComponent />
@@ -12,4 +12,4 @@ const Main = () => {
     )
 };
 
-export default Main;
+export default MainLayout;

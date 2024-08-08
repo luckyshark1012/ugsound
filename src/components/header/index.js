@@ -22,7 +22,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -36,7 +36,7 @@ const callsToAction = [
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
 
-export default function HeaderComponent() {
+const HeaderComponent = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const navigate = useNavigate();
 
@@ -45,14 +45,42 @@ export default function HeaderComponent() {
   };
 
   return (
-    <header className="bg-white">
+    <header className="sticky top-0 bg-white" style={{ zIndex: 10 }}>
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to='/home' className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img alt="" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" className="h-8 w-auto" />
-          </a>
+            <img alt="" src="https://cdn-icons-png.flaticon.com/128/2753/2753289.png" className="h-8 w-auto" />
+          </Link>
         </div>
+        <PopoverGroup className="hidden lg:flex lg:gap-x-8">
+          <Link to='/home' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('home') && '#9300ff' }}>
+            Home
+          </Link>
+          <Link to='/music_store' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('music_store') && '#9300ff' }}>
+            Music Store
+          </Link>
+          <Link to='/artist_profiles' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('artist_profiles') && '#9300ff' }}>
+            Artist Profiles
+          </Link>
+          <Link to='/broadcast_monitoring' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('broadcast_monitoring') && '#9300ff' }}>
+            Broadcast Monitoring
+          </Link>
+          <Link to='/top_songs' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('top_songs') && '#9300ff' }}>
+            Top Songs
+          </Link>
+          <Link to='/about' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('about') && '#9300ff' }}>
+            About Us
+          </Link>
+          <Link to='/contact_us' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600" style={{ color: document.location.pathname.includes('contact_us') && '#9300ff' }}>
+            Contact Us
+          </Link>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link to='/signin' className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600">
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
+        </PopoverGroup>
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -60,68 +88,8 @@ export default function HeaderComponent() {
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+            <Bars3Icon aria-hidden="false" className="h-6 w-6" />
           </button>
-        </div>
-        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              Product
-              <ChevronDownIcon aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
-            </PopoverButton>
-
-            <PopoverPanel
-              transition
-              className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="p-4">
-                {products.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                  >
-                    <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon aria-hidden="true" className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" />
-                    </div>
-                    <div className="flex-auto">
-                      <a href={item.href} className="block font-semibold text-gray-900">
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </a>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                {callsToAction.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                  >
-                    <item.icon aria-hidden="true" className="h-5 w-5 flex-none text-gray-400" />
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </PopoverPanel>
-          </Popover>
-
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
-          </a>
-        </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -132,7 +100,7 @@ export default function HeaderComponent() {
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                src="https://cdn-icons-png.flaticon.com/128/2753/2753289.png"
                 className="h-8 w-auto"
               />
             </a>
@@ -201,3 +169,5 @@ export default function HeaderComponent() {
     </header>
   )
 }
+
+export default HeaderComponent;
